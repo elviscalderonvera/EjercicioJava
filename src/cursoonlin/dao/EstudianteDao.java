@@ -6,6 +6,7 @@
 package cursoonlin.dao;
 
 import cursoonlin.entidades.Estudiantes;
+import cursoonlin.entidades.curso;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public interface EstudianteDao {
     void ingresar(Estudiantes est);
     void actualizar(Estudiantes est);
     void eliminar(int id);
+    List<curso> getCursosEstudiantes(int estudianteId);
     
     
 }

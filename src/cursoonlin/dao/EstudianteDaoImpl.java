@@ -6,6 +6,7 @@
 package cursoonlin.dao;
 
 import cursoonlin.entidades.Estudiantes;
+import cursoonlin.entidades.curso;
 import cursoonlin.util.Util;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -87,6 +88,30 @@ public class EstudianteDaoImpl implements EstudianteDao{
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public List<curso> getCursosEstudiantes(int estudianteId) {
+        String query= "SELECT cursos.id, cursos.nombre" +
+"	FROM public.cursos" +
+"	inner join cursos_estudiantes on cursos.id= cursos_estudiantes.curso_id" +
+"	where estudiante_id=?;";
+        List<curso> cursos= new ArrayList<curso>();
+        Connection conn;
+        try {
+            conn = DriverManager.getConnection(Util.url,Util.user,Util.password);
+
+            PreparedStatement stm= conn.prepareStatement(query);
+            stm.setInt(1, estudianteId);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                curso curs= new curso(rs.getInt(1), rs.getString(2));
+                cursos.add(curs);  
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return cursos;
     }
 
     

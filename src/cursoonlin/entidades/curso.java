@@ -5,9 +5,13 @@
  */
 package cursoonlin.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class curso {
     private int id;
     private String nombre;
+    private List<Estudiantes> estudiante= new ArrayList<>(); 
 
     public curso() {}
     
@@ -34,6 +38,15 @@ public class curso {
         this.nombre = nombre;
     }
 
+    public List<Estudiantes> getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(List<Estudiantes> estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    
     @Override
     public String toString() {
         return "curso{" + "id=" + id + ", nombre=" + nombre + '}';

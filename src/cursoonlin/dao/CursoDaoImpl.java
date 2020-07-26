@@ -5,6 +5,7 @@
  */
 package cursoonlin.dao;
 
+import cursoonlin.entidades.Estudiantes;
 import cursoonlin.entidades.curso;
 import cursoonlin.util.Util;
 import java.sql.Connection;
@@ -84,6 +85,31 @@ public class CursoDaoImpl implements CursoDao{
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        
+    }
+
+    @Override
+    public List<Estudiantes> getEstudiantesPorCurso(int cursoId) {
+        String query= "SELECT estudiantes.id, nombres, apellidos, email" +
+"	FROM public.estudiantes" +
+"	inner join cursos_estudiantes on estudiantes.id= cursos_estudiantes.estudiante_id" +
+"	where cursos_estudiantes.curso_id=?";
+        List<Estudiantes> est= new ArrayList();
+        Connection conn;
+        try {
+            conn = DriverManager.getConnection(Util.url,Util.user,Util.password);
+            PreparedStatement stm= conn.prepareStatement(query);
+            stm.setInt(1, cursoId);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                Estudiantes estudiantet= new Estudiantes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                est.add(estudiantet);
+                
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return est;
         
     }
     

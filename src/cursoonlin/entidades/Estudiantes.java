@@ -5,6 +5,9 @@
  */
 package cursoonlin.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author walt
@@ -14,6 +17,7 @@ public class Estudiantes {
     private String nombres;
     private String apellidos;
     private String email;
+    private List<curso> cursos= new ArrayList<>(); 
 
     public Estudiantes(){}
 
@@ -58,6 +62,15 @@ public class Estudiantes {
         this.email = email;
     }
 
+    public List<curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    
     @Override
     public String toString() {
         return "Estudiantes{" + "id=" + id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", email=" + email + '}';
